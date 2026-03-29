@@ -8,23 +8,42 @@ import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
 import dns from 'dns'
-dns.setServers(["1.1.1.1","8.8.8.8"]);
+
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 const app = express()
 const port = process.env.PORT || 4000
+
 connectDB()
 connectCloudinary()
 
 app.use(express.json())
-app.use(cors())
 
-app.use('/api/user',userRouter)
-app.use('/api/product',productRouter)
-app.use('/api/cart',cartRouter)
-app.use('/api/order',orderRouter)
+// ✅ CORS with specific origins (update after frontend deployment)
+app.use(cors({
+  origin: [
+    'https://your-frontend.netlify.app',    // replace after frontend deploy
+    'https://your-admin.netlify.app',       // replace after admin deploy
+    'http://localhost:5173'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
-app.get('/',(req,res)=>{
-    res.send("API Working")
+app.options('*', cors())
+
+app.use('/api/user', userRouter)
+app.use('/api/product', productRouter)
+app.use('/api/cart', cartRouter)
+app.use('/api/order', orderRouter)
+
+app.get('/', (req, res) => {
+  res.send("API Working")
 })
 
-app.listen(port, ()=> console.log('Server started on PORT : '+ port))
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => console.log('Server started on PORT : ' + port))
+}
+
+export default app
