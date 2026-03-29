@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(cors({
   origin: [
     'https://new-ecommerce-website-bay.vercel.app',    
-    'https://ecommerce-adminpanel-opal.vercel.app/',   
+    'https://ecommerce-adminpanel-opal.vercel.app',   
     'http://localhost:5173'
   ],
   credentials: true,
