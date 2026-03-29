@@ -16,7 +16,13 @@ connectDB()
 connectCloudinary()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://trendora-ecomm.vercel.app/',   // your deployed frontend URL
+    'https://trendora-admin-panel.vercel.app/'     // your deployed admin URL
+  ],
+  credentials: true,   // if you use cookies/sessions
+}));
 
 app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
