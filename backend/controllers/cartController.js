@@ -18,7 +18,6 @@ const addToCart = async (req,res) => {
             cartData[itemId] = {}
             cartData[itemId][size] = 1
         }
-        toast.success('Item added to cart!');
         await userModel.findByIdAndUpdate(userId, {cartData})
         res.json({ success: true, message: "Added To Cart" })
     } catch (error) {
