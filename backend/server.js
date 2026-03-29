@@ -7,7 +7,7 @@ import userRouter from './routes/userRoute.js'
 import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
-import dns from "dns"
+import dns from 'dns'
 dns.setServers(["1.1.1.1","8.8.8.8"]);
 
 const app = express()
@@ -16,13 +16,7 @@ connectDB()
 connectCloudinary()
 
 app.use(express.json())
-app.use(cors({
-  origin: [
-    'https://trendora-ecomm.vercel.app/',   // your deployed frontend URL
-    'https://trendora-admin-panel.vercel.app/'     // your deployed admin URL
-  ],
-  credentials: true,   // if you use cookies/sessions
-}));
+app.use(cors())
 
 app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
