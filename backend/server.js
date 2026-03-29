@@ -19,10 +19,9 @@ connectCloudinary()
 
 app.use(express.json())
 
-// ✅ CORS with specific origins (update after frontend deployment)
 app.use(cors({
   origin: [
-    'https://your-frontend.netlify.app',    // replace after frontend deploy
+    'https://new-ecommerce-website-bay.vercel.app',    // replace after frontend deploy
     'https://your-admin.netlify.app',       // replace after admin deploy
     'http://localhost:5173'
   ],
